@@ -1,0 +1,88 @@
+Toy Robot - C++ Application
+===========================
+The application is a simulation of a toy robot moving on a square table top, of dimensions 5 units x 5 units. There are no other obstructions on the table surface. The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. Any movement that would result in the robot falling from the table must be prevented, however further valid movement commands must still be allowed.
+
+Build Requirements for Linux/MacOS
+==================================
+Before building the project, ensure that you have the following installed on your system:
+- g++: The GNU C++ compiler
+- Google Test: C++ testing framework
+- nlohmann-json: Header-only JSON library
+
+Installing Dependencies
+=======================
+- Linux (Debian/Ubuntu)
+%sudo apt update
+%sudo apt install libgtest-dev
+%sudo apt install nlohmann-json3-dev
+
+- MacOS
+brew install googletest
+brew install nlohmann-json
+
+Update the GTEST_DIR and NLOHMANN_JSON_INC paths in Makefile after installation
+
+Building the Project
+====================
+This project uses make to build the application and run the tests. The project is structured as follows:
+
+src/ Contains source code files
+  main.cpp: The main application entry point
+  robot.cpp: Defines the Robot class and its functionality
+include/ Contains header files
+  table.h: Define the Table class and it's methods
+  robot.h: Declares the Robot class and its methods
+tests/: Contains test files
+  tests.cpp: Unit tests for the Robot class
+config/ Contains configuration files
+  config.json: Contains the Table width and length configurations
+
+To build the application and run the tests:
+Navigate to your project directory.
+
+Run the following command to compile the application and the tests:
+%make
+This will:
+Compile the source files (main.cpp, robot.cpp)
+Compile the test files (test_robot.cpp)
+Build two executables:
+./robot: The main application
+./robot_tests: The executable for running unit tests
+
+To run the tests, use the following command:
+%make test
+This will execute the tests using Google Test, and output the results in the terminal.
+
+To clean up the build artifacts, use:
+%make clean
+This will remove all object files in build/ directory and executables.
+
+Usage
+=====
+Once the project is built, you can run the robot application with various commands.
+
+To view help text
+%./robot --help
+
+To simulate toy robot
+%./robot
+Then use following commands:
+PLACE x,y,d   Place robot on the table at (x, y) facing a given direction (d)
+MOVE          Move robot forward one unit in the current direction
+LEFT          Turn robot 90 degrees counter-clockwise
+RIGHT         Turn robot 90 degrees clockwise
+REPORT        Print the robot's current position and direction, then exit application
+Valid directions are NORTH,EAST,SOUTH and WEST
+
+Example Usage:
+$ ./robot
+PLACE 0,0,NORTH
+MOVE
+RIGHT
+REPORT
+
+This will:
+Place the robot at coordinates (0, 0) facing NORTH.
+Move the robot one step in the NORTH direction.
+Turn the robot to the left (it will now face EAST).
+Output the current position and direction of the robot as >> 0,1,EAST
